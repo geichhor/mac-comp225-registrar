@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Student {
 
-    public String name;
+    private String studentName;
     public Set<Course> enrolledIn;
 
     public Student(){
@@ -17,16 +17,16 @@ public class Student {
     }
 
     public void setName(String name){
-        this.name = name;
+        this.studentName = name;
     }
 
     public Set<Course> getCourses(){
         return enrolledIn;
     }
 
-    public boolean enrollIn(Course c){
-        if(c.enrollIn(this)) {
-            enrolledIn.add(c);
+    public boolean enrollIn(Course course){
+        if(course.enrollIn(this)) {
+            enrolledIn.add(course);
             return true;
         }
         else {
@@ -34,10 +34,10 @@ public class Student {
         }
     }
 
-    public void drop(Course c){
-        if (enrolledIn.contains(c)) {
-            enrolledIn.remove(c);
+    public void drop(Course course){
+        if (enrolledIn.contains(course)) {
+            enrolledIn.remove(course);
         }
-        c.dropStudent(this);
+        course.dropStudent(this);
     }
 }
