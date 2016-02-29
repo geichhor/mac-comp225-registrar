@@ -14,7 +14,7 @@ public class Course {
     private List<Student> waitlist;
     private String number;
     private String name;
-    private int modifiable;
+    public int modifiable;
 
 
     public Course(){
@@ -84,10 +84,8 @@ public class Course {
 
     public void removeEnrollmentLimit() {
         if (getStudents().equals(enrolledIn)) {
-            removeEnrollmentLimit();
             enrolledIn.remove(setEnrollmentLimit(modifiable));
         }
-        removeEnrollmentLimit();
         enrolledIn.remove(setEnrollmentLimit(modifiable));
     }
 
