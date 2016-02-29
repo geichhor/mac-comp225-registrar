@@ -14,13 +14,13 @@ public class Course {
     private List<Student> waitlist;
     private String number;
     private String name;
-    private int courseLimit;
+    private int modifiable;
 
 
     public Course(){
         enrolledIn = new HashSet<>();
         waitlist = new ArrayList<>();
-        courseLimit = 16;
+        modifiable = 16;
     }
 
     public void setCatalogNumber(String number){
@@ -33,13 +33,13 @@ public class Course {
 
 
     public int getEnrollmentLimit(){
-        return courseLimit;
+        return modifiable;
     }
 
     public boolean setEnrollmentLimit(int limit){
         //If students are enrolled you can't change the limit
         if (enrolledIn.size() == 0){
-            this.courseLimit = limit;
+            this.modifiable = limit;
             return true;
         }
         return false;
@@ -57,7 +57,7 @@ public class Course {
         if (enrolledIn.contains(student)){
             return true;
         }
-        if (enrolledIn.size() >= courseLimit){
+        if (enrolledIn.size() >= modifiable || enrolledIn.size() <= modifiable){
             if (waitlist.contains(student)){
                 return false;
             }
@@ -80,6 +80,15 @@ public class Course {
         else if (waitlist.contains(student)){
             waitlist.remove(student);
         }
+    }
+
+    public void removeEnrollmentLimit() {
+        if (getStudents().equals(enrolledIn)) {
+            removeEnrollmentLimit();
+            enrolledIn.remove(setEnrollmentLimit(modifiable));
+        }
+        removeEnrollmentLimit();
+        enrolledIn.remove(setEnrollmentLimit(modifiable));
     }
 
 }
